@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Unique key of the Deployment instance
+  name: deployment-example
+spec:
+  # 3 Pods should exist at all times.
+  replicas: 3
+  selector:
+    matchLabels:
+      #must match with pods name you created
+      app: nginx
+  template:
+    metadata:
+      labels:
+        # Apply this label to pods and default. this name same with above
+        # the Deployment label selector to this value
+        app: nginx
+    spec:
+      containers:
+        #here is containers name. name:vlue. not app(pods) name.
+        #the container run in the nginx pod.use same name better to be group
+      - name: nginx
+        # Run this image
+        image: nginx:1.14
