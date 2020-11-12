@@ -1,3 +1,4 @@
+#ReplicaSet not common already. use Deployment better as support to  update roll back 
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
