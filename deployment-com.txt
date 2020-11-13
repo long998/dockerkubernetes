@@ -1,0 +1,39 @@
+kubectl apply -f *.yaml 
+kubectl get deployment
+
+#deploy finish or not
+kubectl rollout status
+kubectl get pods --show-labels
+
+#update pods image version
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record
+
+#or, you can see how to access the tag 
+kubectl edit deployment.v1.apps/nginx-deployment..spec.template.spec.containers[0].image  nginx:1.16.1
+
+#check rolling update status
+kubectl get rs
+
+kubectl describe deployments
+
+#the rolling process
+kubectl rollout status deployment.v1.apps/nginx-deployment 
+kubectl rollout history deployment.v1.apps/nginx-deployment
+
+#if update fail, roll bock last old version
+kubectl rollout undo deployment.v1.apps/nginx-deployment
+
+kubectl scale deployment.v1.apps/nginx-deployment --replicas=10
+
+#stop update. update fail will pause but still try.
+kubectl rollout pause deployment.v1.apps/nginx-deployment
+
+#after you fix. you can start up again as you paused before
+kubectl rollout resume deployment.v1.apps/nginx-deployment
+
+#set resource(cpu, memory)
+kubectl set resources deployment.v1.apps/nginx-deployment -c=nginx --limits=cpu=200m,memory=512Mi
+
+
+
+
